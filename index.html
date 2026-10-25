@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0f3d2e" />
+    <meta name="description" content="Zrób zdjęcie przedmiotu i sprawdź, ile CO₂e kosztowało jego wyprodukowanie i dostarczenie. Rozpoznawanie działa w całości w przeglądarce." />
+    <link rel="icon" href="/emisja-co2-app/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/emisja-co2-app/icon.svg" />
+    <link rel="manifest" href="/emisja-co2-app/manifest.webmanifest" />
+    <title>Emisja CO₂ – ślad węglowy ze zdjęcia</title>
+    <script type="module" crossorigin src="/emisja-co2-app/assets/index-DvqHoMZk.js"></script>
+    <link rel="stylesheet" crossorigin href="/emisja-co2-app/assets/index-D_ZnEl1Y.css">
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero-inner">
+        <div class="logo">🌍</div>
+        <div>
+          <h1>Emisja CO₂</h1>
+          <p>Zrób zdjęcie przedmiotu – sprawdź, ile CO₂ kosztowało jego wyprodukowanie i dostarczenie.</p>
+        </div>
+      </div>
+      <div class="badges"><span>🔒 Zdjęcie nie opuszcza telefonu</span><span>🧠 AI w przeglądarce</span><span>📚 Źródła przy każdej liczbie</span></div>
+    </header>
+
+    <main>
+      <section class="card" id="photo-card">
+        <div class="drop" id="drop">
+          <div id="drop-empty">
+            <div class="drop-icon">📷</div>
+            <p class="drop-title">Sfotografuj przedmiot</p>
+            <p class="muted">Najlepiej jeden przedmiot, w całości, na spokojnym tle.</p>
+          </div>
+          <img id="preview" alt="Zdjęcie przedmiotu" hidden />
+        </div>
+        <div class="buttons center">
+          <label class="btn primary big">📷 Zrób zdjęcie
+            <input id="camera-input" type="file" accept="image/*" capture="environment" hidden />
+          </label>
+          <label class="btn big">🖼️ Z galerii
+            <input id="file-input" type="file" accept="image/*" hidden />
+          </label>
+        </div>
+        <p class="center"><button class="link" id="manual-btn" type="button">…albo wybierz przedmiot bez zdjęcia</button></p>
+        <div id="model-status" class="model-status" hidden>
+          <div class="progress"><span id="model-progress"></span></div>
+          <p class="muted" id="model-status-text"></p>
+        </div>
+        <div id="recognition" aria-live="polite"></div>
+      </section>
+
+      <section class="card" id="result-card" hidden>
+        <div id="result"></div>
+      </section>
+
+      <section class="card" id="edit-card" hidden>
+        <h2>✏️ Popraw dane – wynik przelicza się na żywo</h2>
+        <form id="form" class="grid" onsubmit="return false">
+          <label class="full">Przedmiot
+            <input id="cat-search" type="search" placeholder="🔎 Szukaj (np. rower, ser, wiertarka)…" autocomplete="off" />
+            <select id="category" size="1"></select>
+          </label>
+          <div class="full">
+            <span class="lbl">Rozmiar / masa</span>
+            <div class="seg" id="size-seg">
+              <button type="button" data-size="S">Mały</button>
+              <button type="button" data-size="M" class="on">Typowy</button>
+              <button type="button" data-size="L">Duży</button>
+            </div>
+            <div class="row">
+              <input id="mass" type="number" min="0.001" step="any" inputmode="decimal" aria-label="Masa w kg" />
+              <span class="unit">kg</span>
+            </div>
+            <span class="muted" id="mass-hint"></span>
+          </div>
+          <label>Kraj produkcji
+            <select id="origin"></select>
+          </label>
+          <label>Transport do Polski
+            <select id="mode">
+              <option value="sea">🚢 Statek</option>
+              <option value="road">🚚 Ciężarówka</option>
+              <option value="rail">🚆 Kolej</option>
+              <option value="air">✈️ Samolot</option>
+            </select>
+          </label>
+          <label class="check"><input id="include-use" type="checkbox" checked /> Uwzględnij użytkowanie</label>
+          <label class="check"><input id="include-eol" type="checkbox" checked /> Uwzględnij koniec życia</label>
+          <div id="use-fields" class="grid sub-grid full">
+            <label>Sieć energetyczna
+              <select id="grid">
+                <option value="PL">Polska (0,608 kg/kWh)</option>
+                <option value="EU">Średnia UE (0,242 kg/kWh)</option>
+                <option value="FR">Francja (0,0405 kg/kWh)</option>
+                <option value="custom">Własna wartość…</option>
+              </select>
+            </label>
+            <label id="custom-grid-wrap" hidden>kg CO₂e/kWh
+              <input id="custom-grid" type="number" min="0" step="any" value="0.3" />
+            </label>
+            <label>Zużycie energii [kWh/rok]
+              <input id="kwh" type="number" min="0" step="any" />
+            </label>
+            <label>Okres użytkowania [lata]
+              <input id="years" type="number" min="0" step="any" />
+            </label>
+          </div>
+        </form>
+      </section>
+
+      <section class="card">
+        <details id="settings">
+          <summary>⚙️ Tryb rozszerzony (opcjonalnie: własny klucz API)</summary>
+          <p class="muted">Aplikacja nie potrzebuje żadnego klucza – rozpoznawanie odbywa się na Twoim urządzeniu. Jeśli chcesz, podaj własny klucz OpenAI lub Google Gemini: wtedy zdjęcie zostanie <strong>dodatkowo wysłane do tego dostawcy</strong>, który może rozpoznać konkretny model i oszacować masę oraz materiały. Klucz zostaje tylko w tej przeglądarce.</p>
+          <div class="grid">
+            <label>Dostawca
+              <select id="llm-provider">
+                <option value="">— wyłączony —</option>
+                <option value="openai">OpenAI</option>
+                <option value="gemini">Google Gemini</option>
+              </select>
+            </label>
+            <label>Klucz API
+              <input id="llm-key" type="password" autocomplete="off" placeholder="sk-… / AIza…" />
+            </label>
+            <label>Model (opcjonalnie)
+              <input id="llm-model" type="text" placeholder="domyślny" />
+            </label>
+          </div>
+          <div class="buttons">
+            <button class="btn primary" id="llm-save" type="button">Zapisz</button>
+            <button class="btn" id="llm-clear" type="button">Usuń klucz</button>
+            <span id="llm-status" class="muted"></span>
+          </div>
+        </details>
+      </section>
+
+      <section class="card">
+        <details>
+          <summary>📚 Jak to liczymy? Metodyka i źródła</summary>
+          <div id="methodology"></div>
+        </details>
+      </section>
+    </main>
+    <footer class="muted">Wyniki to szacunki rzędu wielkości, a nie certyfikowany ślad węglowy (ISO 14067).</footer>
+  </body>
+</html>
