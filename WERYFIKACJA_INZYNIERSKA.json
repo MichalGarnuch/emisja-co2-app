@@ -1,0 +1,19 @@
+{
+  "repository": "emisja-co2-app",
+  "branch": "wersja-inzynierska-2026",
+  "base_ref": "main",
+  "base_commit": "1c6941fd704e30f18dce0f7a33a88a15ca6bb6b3",
+  "date": "2026-10-29",
+  "checks": [
+    {
+      "command_or_scope": "node --test scripts/*.test.mjs",
+      "result": "PASS: test podmiany zawartości i ścieżki poza katalog"
+    },
+    {
+      "command_or_scope": "node scripts/verify-release.mjs",
+      "result": "PASS: 19 oryginalnych plików runtime"
+    }
+  ],
+  "limitations": "Brak źródeł, więc nie wykonano testów jednostkowych aplikacji ani rebuilda. Manifest nie jest podpisem kryptograficznym autora i nie jest sandboxem do uruchamiania niezaufanych pakietów.",
+  "production_deployment_performed": false
+}

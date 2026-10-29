@@ -1,0 +1,101 @@
+{
+  "artifactBase": "1c6941fd704e30f18dce0f7a33a88a15ca6bb6b3",
+  "sourceCommit": null,
+  "files": [
+    {
+      "path": ".nojekyll",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "assets/clip-CwV-X9Fp.js",
+      "bytes": 1743,
+      "sha256": "8af6110d4aaefef3a0d86b864b7c67a252b61e2149530980328eea6de08a60dd"
+    },
+    {
+      "path": "assets/index-D_ZnEl1Y.css",
+      "bytes": 6784,
+      "sha256": "992eaf3270819e27f108f31c2c134a0cac2aa125775f97e1b9b560b95377fcc4"
+    },
+    {
+      "path": "assets/index-DvqHoMZk.js",
+      "bytes": 97809,
+      "sha256": "1328c466cb27f437345ce1a3c51b8bcfd01a3493d029f8e3f362dca4cb75473f"
+    },
+    {
+      "path": "assets/ort-wasm-simd-threaded.asyncify-CxOG5pUO.wasm",
+      "bytes": 26861777,
+      "sha256": "49871f5a4409519797e127440868a6d1923339d9185907f301a5b2a1d90af082"
+    },
+    {
+      "path": "assets/transformers.web-zu1-WwNy.js",
+      "bytes": 578528,
+      "sha256": "976e2be0ba17ef43c24da1a620cb9df10745db8d5c4d43c11cebf2623e291f42"
+    },
+    {
+      "path": "icon.svg",
+      "bytes": 387,
+      "sha256": "0304870a4df275d6620fbb3be7af47cc336eab1ffce3cea83f08ef6e567e8465"
+    },
+    {
+      "path": "index.html",
+      "bytes": 7110,
+      "sha256": "e72b5bc991f77b3c27e7a992977d8b082f03362a227d3f2d5a89bde1123eb30e"
+    },
+    {
+      "path": "manifest.webmanifest",
+      "bytes": 338,
+      "sha256": "ced8d047163c80942606e87d9d4374eb7595ccbaf56b7d9f66709eb80d23a843"
+    },
+    {
+      "path": "models/mobileclip_s0/config.json",
+      "bytes": 344,
+      "sha256": "8e33c1f2634a33de3e38715f9809ef86742aacbe31c310c66fc2636755458d56"
+    },
+    {
+      "path": "models/mobileclip_s0/onnx/vision_model_fp16.onnx",
+      "bytes": 22876479,
+      "sha256": "22b1d36ecc6837e8205aee05003440a25e1c1ee0c7e2945dbb9dd597211c59dc"
+    },
+    {
+      "path": "models/mobileclip_s0/preprocessor_config.json",
+      "bytes": 382,
+      "sha256": "b031f09fbd69e22a605b6cc7433993249ee893b7fc1b79321f669cd015493dd4"
+    },
+    {
+      "path": "models/mobileclip_s0/text_embeds.bin",
+      "bytes": 413696,
+      "sha256": "b09d909f2bce9e9e2a4041e96212de66be9c0802af176f93a49ec508605ffc77"
+    },
+    {
+      "path": "models/mobileclip_s0/text_embeds.json",
+      "bytes": 2210,
+      "sha256": "34be94f4acc6c3c80371d9674824d77a6d6fed75532a84d95a869d6b36a784d8"
+    },
+    {
+      "path": "ort/ort-wasm-simd-threaded.asyncify.mjs",
+      "bytes": 53057,
+      "sha256": "0966b6105cd936744498aa60df7a22cbd47af3374dbc64a9ab561c08a71e3611"
+    },
+    {
+      "path": "ort/ort-wasm-simd-threaded.asyncify.wasm",
+      "bytes": 26861777,
+      "sha256": "49871f5a4409519797e127440868a6d1923339d9185907f301a5b2a1d90af082"
+    },
+    {
+      "path": "ort/ort-wasm-simd-threaded.jsep.mjs",
+      "bytes": 46851,
+      "sha256": "c2f80e915e9df63289788a99d434d8c4e00e64e9c1f030f4b80b022458dd2c99"
+    },
+    {
+      "path": "ort/ort-wasm-simd-threaded.jsep.wasm",
+      "bytes": 28352885,
+      "sha256": "62ff86b2f2fa3a79eb87a7e4720e8ea9051942bf975f314181bf7dcef2feac06"
+    },
+    {
+      "path": "sw.js",
+      "bytes": 1336,
+      "sha256": "c3989f5f26092ac843d6ce17bef680c692fb637a21cd3f43fa8c25db6da7b671"
+    }
+  ]
+}
